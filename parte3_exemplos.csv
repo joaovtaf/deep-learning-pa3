@@ -1,0 +1,9 @@
+image_id,tipo,foco,diagnostico
+b4ba3ffd9b742f4f,erro,fundo,"Ave no centro inferior, em tons de cinza. A maior ativação está na tela e no poste à direita, longe da ave; o cenário é compatível com a previsão chicken. Sugere dependência do fundo."
+50de954e62991d20,erro,fundo,"Animal quase fora do quadro, na borda direita, em tons de cinza. O mapa destaca o tronco e o solo à esquerda; a região visível do animal recebe pouca ativação. Evidência espacial de foco no fundo."
+69b9c70abd6097b3,erro,animal,"Animal na metade inferior esquerda, em tons de cinza. O mapa coincide com cabeça e ombro; ainda assim prevê grey_fox. O erro entre espécies não é explicado por foco predominante no fundo."
+8d4560b32a56b673,acerto,misto,"Animal grande e bem visível em tons de cinza. A ativação coincide com as patas traseiras e o solo ao redor; há evidência de uso do animal, mas o foco é misto, não exclusivamente corporal."
+4fa6a1fb28437176,acerto,animal,Ave grande no canto inferior esquerdo de uma foto colorida. A região quente acompanha seu corpo; há também ativação menor junto à ave da borda direita. Acerto com foco espacial no animal.
+410d9af7caba9688,acerto,fundo,"Gato na borda esquerda, desfocado, em tons de cinza. O pico está no fundo à direita, junto aos pontos luminosos, distante do animal. Acerto com forte ativação do cenário, não evidência de reconhecimento do corpo."
+fe0f9ec39c4b2192,acerto,fundo,"Animal parcialmente cortado na borda inferior. O mapa destaca a tela e o poste da direita, quase sem destaque sobre o animal. O acerto é compatível com uso do contexto do cercado."
+dcbc4cb8d3a0c6b6,acerto,fundo,"Animal minúsculo no chão, na base do reservatório. O mapa se espalha sobretudo pelo reservatório e pela parede; a resolução de 10 x 10 não separa bem animal e entorno. Acerto com foco predominante no cenário."

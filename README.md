@@ -119,6 +119,79 @@ pareadas estao em `resultados/parte2_por_classe.csv`.
 O ganho de `horse` (+0,117) deve ser interpretado com cuidado: ha apenas
 quatro imagens dessa classe no teste.
 
+## Parte 3: galeria de falhas e atalhos
+
+Usamos o orcamento padrao de **5 rotulos por classe**, tau=0,9 e a mesma
+ResNet-18. A seed do modelo final e escolhida pelo maior F1 no `val` entre
+os checkpoints das seeds 0, 1 e 2. O checkpoint original da seed 0 nao estava
+disponivel localmente, por isso seu treino foi reproduzido em MPS com o mesmo
+protocolo, em arquivos com sufixo `reproduzido`. Os resultados originais das
+Partes 1 e 2 permanecem preservados; a nova execucao pode produzir numeros
+diferentes por causa do dispositivo e da aleatoriedade do treino.
+
+```bash
+export PA3_DADOS="$PWD/pa3_dados"
+python parte3.py --preparar   # reproduz pesos ausentes e seleciona pelo val
+python parte3.py             # reproduz os 3 erros e 5 acertos selecionados
+python -m unittest test_parte3.py
+```
+
+`resultados/parte3_selecao.csv` registra a comparacao no val.
+`resultados/parte3_modelo.json` identifica o checkpoint selecionado, seu hash
+SHA-256, a epoca, o orcamento e as metricas. Uma copia dos pesos fica em
+`pesos/modelo_final.pt`; a galeria verifica esse hash antes de executar.
+`resultados/parte3_test.csv` contem as predicoes desse mesmo modelo.
+
+O [Grad-CAM de Selvaraju et al.](https://arxiv.org/abs/1610.02391) usa a media
+espacial dos gradientes do logit previsto para ponderar os canais de `layer4`,
+seguida de ReLU. Na entrada de 320 x 320, o mapa original e de 10 x 10;
+a interpolacao apenas permite sobrepo-lo a imagem, sem acrescentar detalhes.
+Os mapas sao normalizados individualmente entre 0 e 1. Amarelo indica maior
+ativacao positiva relativa; nao e uma probabilidade nem uma segmentacao.
+A confianca mostrada nas figuras e a maior probabilidade softmax, sem
+calibracao; valores altos tambem podem acompanhar erros.
+
+Os exemplos sao fixados em `parte3_exemplos.csv`, depois da inspecao visual
+das imagens e dos mapas. Essa escolha e apenas diagnostica: nao modifica
+pesos nem hiperparametros. Para gerar as folhas de candidatos novamente,
+use `python parte3.py --candidatos`. As classes verdadeiras sempre vem do
+gabarito oficial do `test_public`, sem criar novos rotulos para treinamento.
+Os casos sao ilustrativos e nao representam a frequencia desses
+comportamentos no conjunto de teste inteiro.
+
+As figuras individuais e as galerias ficam em `figs/parte3/`.
+`resultados/parte3_galeria.csv` registra IDs, verdade, previsao, confianca,
+diagnostico e hash do modelo para os oito exemplos. O mapa pode sugerir
+dependencia do fundo; sozinho, ele nao comprova causalmente um atalho.
+
+### Modelo e exemplos selecionados
+
+O modelo final desta galeria e a **seed 0 reproduzida, epoca 3**:
+F1 no val **0,599**, contra 0,550 e 0,551 das seeds 1 e 2. No test_public,
+esse checkpoint obteve **F1 macro 0,589** e **acuracia 0,656**. Esses valores
+sao da nova execucao; nao substituem os numeros originais da Parte 2.
+
+- [Galeria dos tres erros](figs/parte3/galeria_erros.png)
+- [Galeria dos cinco acertos](figs/parte3/galeria_acertos.png)
+
+| Exemplo (figura com diagnostico) | Verdade | Previsao | Confianca | Foco observado |
+|---|---|---|---|---|
+| [Erro 1](figs/parte3/erro_b4ba3ffd9b742f4f.png) | bird | chicken | 96,38% | cerca e poste, distante da ave |
+| [Erro 2](figs/parte3/erro_50de954e62991d20.png) | eastern_cottontail | virginia_opossum | 96,31% | tronco e solo, animal na borda direita |
+| [Erro 3](figs/parte3/erro_69b9c70abd6097b3.png) | bobcat | grey_fox | 71,65% | cabeca e ombro do animal |
+| [Acerto 1](figs/parte3/acerto_8d4560b32a56b673.png) | american_black_bear | american_black_bear | 99,95% | misto: patas e solo |
+| [Acerto 2](figs/parte3/acerto_4fa6a1fb28437176.png) | american_crow | american_crow | 99,98% | corpo das aves |
+| [Acerto 3](figs/parte3/acerto_410d9af7caba9688.png) | domestic_cat | domestic_cat | 99,11% | fundo a direita, perto das luzes |
+| [Acerto 4](figs/parte3/acerto_fe0f9ec39c4b2192.png) | chicken | chicken | 97,36% | cerca e poste |
+| [Acerto 5](figs/parte3/acerto_dcbc4cb8d3a0c6b6.png) | eastern_chipmunk | eastern_chipmunk | 99,95% | reservatorio e parede |
+
+Nos cinco acertos escolhidos, tres mapas mostram foco predominantemente no
+cenario, um coincide com o animal e um e misto. O cercado recebe forte
+ativacao tanto no erro `bird -> chicken` como no acerto de `chicken`,
+sugerindo uma associacao entre esse contexto e a classe. O erro
+`bobcat -> grey_fox`, por outro lado, destaca o proprio animal: a galeria
+tambem mostra que confusoes entre especies podem ocorrer com foco corporal.
+
 ## Resultados das Partes 0 e 1 (seed 0, test_public)
 
 | modelo | F1 macro | acurácia |

@@ -1,0 +1,4 @@
+seed,tag,f1_val,epoca_val,pesos,escolhido
+0,r5_s0_reproduzido,0.5990836497715907,3,pesos/aluno_r5_s0_reproduzido_t0.9.pt,True
+1,r5_s1,0.550466073430582,5,pesos/aluno_r5_s1_t0.9.pt,False
+2,r5_s2,0.550809512969345,4,pesos/aluno_r5_s2_t0.9.pt,False

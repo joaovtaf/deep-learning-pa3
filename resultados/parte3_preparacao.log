@@ -1,0 +1,46 @@
+Reproduzindo seed 0; os arquivos originais serao preservados.
+epoca 1/6, lote 30/94
+epoca 1/6, lote 60/94
+epoca 1/6, lote 90/94
+{'epoca': 1, 'perda_treino': 0.675202572107315, 'acc_treino': 0.8416666666666667, 'perda_val': 1.7751718759536743, 'f1_val': 0.5337547628632344, 'acc_val': 0.5396039603960396}
+epoca 2/6, lote 30/94
+epoca 2/6, lote 60/94
+epoca 2/6, lote 90/94
+{'epoca': 2, 'perda_treino': 0.1608198562860489, 'acc_treino': 0.962, 'perda_val': 2.1012027263641357, 'f1_val': 0.49207373095665424, 'acc_val': 0.4801980198019802}
+epoca 3/6, lote 30/94
+epoca 3/6, lote 60/94
+epoca 3/6, lote 90/94
+{'epoca': 3, 'perda_treino': 0.09797317299246788, 'acc_treino': 0.976, 'perda_val': 1.713629961013794, 'f1_val': 0.5990836497715907, 'acc_val': 0.6188118811881188}
+epoca 4/6, lote 30/94
+epoca 4/6, lote 60/94
+epoca 4/6, lote 90/94
+{'epoca': 4, 'perda_treino': 0.041889792834719025, 'acc_treino': 0.9936666666666667, 'perda_val': 1.8722189664840698, 'f1_val': 0.5494940110431524, 'acc_val': 0.5594059405940595}
+epoca 5/6, lote 30/94
+epoca 5/6, lote 60/94
+epoca 5/6, lote 90/94
+{'epoca': 5, 'perda_treino': 0.030105086413522563, 'acc_treino': 0.9933333333333333, 'perda_val': 1.7469775676727295, 'f1_val': 0.543767989727005, 'acc_val': 0.5643564356435643}
+epoca 6/6, lote 30/94
+epoca 6/6, lote 60/94
+epoca 6/6, lote 90/94
+{'epoca': 6, 'perda_treino': 0.023599666950603327, 'acc_treino': 0.9943333333333333, 'perda_val': 1.7490850687026978, 'f1_val': 0.5690179295589881, 'acc_val': 0.5792079207920792}
+ seed               tag   f1_val  epoca_val                                 pesos  escolhido
+    0 r5_s0_reproduzido 0.599084          3 pesos/aluno_r5_s0_reproduzido_t0.9.pt       True
+    1             r5_s1 0.550466          5             pesos/aluno_r5_s1_t0.9.pt      False
+    2             r5_s2 0.550810          4             pesos/aluno_r5_s2_t0.9.pt      False
+{
+  "seed": 0,
+  "tag": "r5_s0_reproduzido",
+  "f1_val": 0.5990836497715907,
+  "epoca_val": 3,
+  "pesos": "pesos/aluno_r5_s0_reproduzido_t0.9.pt",
+  "orcamento": 5,
+  "tau": 0.9,
+  "pesos_final": "pesos/modelo_final.pt",
+  "sha256": "0ce2ea5bb3324a6ab5323ddd1a5a0d3cf90cbe62138ad1c7b9721d8ddfac1ad3",
+  "f1_macro": 0.5885573321586557,
+  "acuracia": 0.655980271270037,
+  "tamanho_entrada": 320,
+  "camada_gradcam": "layer4",
+  "alvo_gradcam": "logit da classe prevista",
+  "seed0_reproduzida": true
+}

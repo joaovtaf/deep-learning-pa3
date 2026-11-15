@@ -15,3 +15,12 @@ Ele ajudou a montar o pipeline sem vazar val nem test_public na escolha do model
 Quando a GPU do Kaggle e a do Colab ficaram sem vaga, ele mediu a velocidade da nossa CPU. O aluno levaria mais de 20 horas, então rodamos cada tau num notebook de CPU separado no Kaggle, em paralelo e com menos épocas.
 
 Quando o aluno tirou F1 0 em eastern_cottontail, o Claude conferiu se era bug. Pelas confusões, os coelhos viram gambá e as galinhas viram coelho, o que parece atalho de fundo. Vamos investigar isso com Grad-CAM na Parte 3.
+
+Na Parte 3, pedimos ao Codex a continuidade da análise do modelo da Trilha C,
+mantendo o orçamento de 5 rótulos por classe e a escolha de checkpoint pelo val.
+Indicamos os pesos disponíveis; como faltava o checkpoint original da seed 0
+nesse orçamento, a ferramenta reproduziu o treino em arquivos separados,
+preservando os resultados anteriores. O Codex implementou e testou o Grad-CAM,
+gerou a galeria de três erros e cinco acertos e redigiu diagnósticos a partir
+da inspeção das imagens e dos mapas. Essas interpretações são exploratórias:
+não criam rótulos de treino nem demonstram, sozinhas, a causa de cada previsão.

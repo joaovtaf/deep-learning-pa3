@@ -6,3 +6,5 @@ images/
 labels/
 pa3_dados/
 pesos/
+figs/parte3/candidatos_*.png
+resultados/parte3_candidatos*
