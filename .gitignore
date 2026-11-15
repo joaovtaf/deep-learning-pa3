@@ -1,0 +1,8 @@
+__pycache__/
+.mplconfig/
+pa3_dados*.zip
+pa3_dados_download.html
+images/
+labels/
+pa3_dados/
+pesos/

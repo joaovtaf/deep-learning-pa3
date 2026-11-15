@@ -15,7 +15,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.environ.get("PA3_DADOS", AQUI)
 CLASSES = pd.read_csv(os.path.join(RAIZ, "classes.csv")).label.tolist()
 IDX = {c: i for i, c in enumerate(CLASSES)}
-DEV = "cuda" if torch.cuda.is_available() else "cpu"
+DEV = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 TAM = 320
 MEDIA, DESVIO = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
 
@@ -53,8 +53,9 @@ class Imagens(torch.utils.data.Dataset):
 
 
 def loader(ds, bs, shuffle=False, sampler=None):
-    return torch.utils.data.DataLoader(ds, bs, shuffle=shuffle, sampler=sampler, num_workers=min(8, os.cpu_count()),
-                                       pin_memory=DEV == "cuda", persistent_workers=True)
+    workers = int(os.environ.get("PA3_WORKERS", min(8, os.cpu_count() or 1)))
+    return torch.utils.data.DataLoader(ds, bs, shuffle=shuffle, sampler=sampler, num_workers=workers,
+                                       pin_memory=DEV == "cuda", persistent_workers=workers > 0)
 
 
 def semente(s):
@@ -107,7 +108,7 @@ def treina(model, ds_treino, ds_val, epocas, lr, sampler=None, bs=32):
     for ep in range(epocas):
         model.train()
         soma, acertos, n = 0.0, 0, 0
-        for x, y in dl:
+        for passo, (x, y) in enumerate(dl, 1):
             x, y = x.to(DEV), y.to(DEV)
             with torch.autocast("cuda", enabled=DEV == "cuda"):
                 out = model(x)
@@ -119,6 +120,8 @@ def treina(model, ds_treino, ds_val, epocas, lr, sampler=None, bs=32):
             soma += perda.item() * len(y)
             acertos += (out.argmax(1) == y).sum().item()
             n += len(y)
+            if passo % 30 == 0:
+                print(f"epoca {ep + 1}/{epocas}, lote {passo}/{len(dl)}", flush=True)
         sched.step()
         pv = prediz(model, ds_val)
         f1v, accv = metricas(yv, pv.argmax(1))

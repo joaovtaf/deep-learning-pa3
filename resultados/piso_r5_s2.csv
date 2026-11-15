@@ -1,0 +1,2 @@
+modelo,epoca_val,f1_val,f1_macro,acuracia
+b_resnet18_imagenet,40,0.3988114918026654,0.43896774835208324,0.47102342786683105

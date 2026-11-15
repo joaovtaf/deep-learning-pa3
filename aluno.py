@@ -56,8 +56,8 @@ def R(f):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--taus", type=float, nargs="+", default=[0, 0.5, 0.7, 0.9])
-    ap.add_argument("--orcamento", type=int, default=5)
+    ap.add_argument("--taus", type=float, nargs="+", default=[0.0, 0.5, 0.7, 0.9])
+    ap.add_argument("--orcamento", type=int, choices=[1, 5, 20], default=5)
     ap.add_argument("--seed", type=int, default=0)
     # 6 epocas de 3000 amostras porque so tinha CPU (a GPU do Kaggle e do Colab ficou sem vaga)
     ap.add_argument("--epocas", type=int, default=6)

@@ -1,5 +1,13 @@
 # AI_LOG
 
+Na Parte 2, usamos o Codex para adaptar o piso aos tres
+orcamentos, separar as saidas por seed e automatizar as oito execucoes pendentes.
+Ele preparou a consolidacao do F1 macro e da acuracia, media e desvio entre
+seeds, curva de orcamento e ganho aluno menos piso por classe, com testes de
+estatisticas e de alinhamento dos IDs. Mantivemos tau=0,9, escolhido no val
+do experimento original, e os mesmos numeros de epocas e amostras. O pacote
+oficial foi usado localmente, e o codigo passou a aproveitar a GPU Apple MPS.
+
 Usamos o Claude Code dentro do VS Code. As decisões de método foram nossas, depois de discutir as opções com ele.
 
 Ele ajudou a montar o pipeline sem vazar val nem test_public na escolha do modelo. O professor nunca vê o val, o prompt foi fixado antes de olhar qualquer resultado, e a época e o tau são escolhidos no val, com o test entrando só no fim.
