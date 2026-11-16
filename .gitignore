@@ -8,3 +8,5 @@ pa3_dados/
 pesos/
 figs/parte3/candidatos_*.png
 resultados/parte3_candidatos*
+resultados/*.log
+resultados/parte2_pendencias.csv
