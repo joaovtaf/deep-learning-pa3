@@ -59,7 +59,7 @@ def preparar():
     selecao["escolhido"] = selecao.index == idx
     selecao.to_csv(R / "parte3_selecao.csv", index=False)
     escolhido = linhas[idx]
-    final = ROOT / "pesos" / "modelo_final.pt"
+    final = ROOT / "modelo_final.pt"
     shutil.copyfile(ROOT / escolhido["pesos"], final)
     teste = pd.read_csv(R / f"aluno_{escolhido['tag']}_t0.9_test.csv", dtype={"image_id": str})
     gab = pd.read_csv(Path(RAIZ) / "labels" / "test_public.csv", dtype={"image_id": str})
@@ -68,7 +68,7 @@ def preparar():
         raise ValueError("Predicoes e gabarito do test_public diferem")
     f1, acc = metricas(teste.label, teste.pred)
     teste.to_csv(R / "parte3_test.csv", index=False)
-    meta = dict(**escolhido, orcamento=5, tau=0.9, pesos_final="pesos/modelo_final.pt",
+    meta = dict(**escolhido, orcamento=5, tau=0.9, pesos_final="modelo_final.pt",
                 sha256=sha256(final), f1_macro=f1, acuracia=acc, tamanho_entrada=TAM,
                 camada_gradcam="layer4", alvo_gradcam="logit da classe prevista",
                 seeds_reproduzidas=[s["seed"] for s in linhas if s["tag"].endswith("reproduzido")])

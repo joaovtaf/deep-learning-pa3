@@ -6,7 +6,7 @@
   "pesos": "pesos/aluno_r5_s0_reproduzido_t0.9.pt",
   "orcamento": 5,
   "tau": 0.9,
-  "pesos_final": "pesos/modelo_final.pt",
+  "pesos_final": "modelo_final.pt",
   "sha256": "0ce2ea5bb3324a6ab5323ddd1a5a0d3cf90cbe62138ad1c7b9721d8ddfac1ad3",
   "f1_macro": 0.5885573321586557,
   "acuracia": 0.655980271270037,
