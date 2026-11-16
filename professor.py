@@ -25,7 +25,7 @@ with torch.no_grad():
 limite = int(sys.argv[1]) if len(sys.argv) > 1 else None  # so pra testar rapido
 os.makedirs(os.path.join(AQUI, "resultados"), exist_ok=True)
 for conj in ["train", "test_public"]:
-    ids = sorted(f[:-4] for f in os.listdir(os.path.join(RAIZ, "images", conj)))[:limite]
+    ids = sorted(f[:-4] for f in os.listdir(os.path.join(RAIZ, "images", conj)) if f.endswith(".jpg"))[:limite]
     probs = []
     for i in range(0, len(ids), 32):
         x = torch.stack([prep(quadrado(Image.open(os.path.join(RAIZ, "images", conj, j + ".jpg")).convert("RGB")))
