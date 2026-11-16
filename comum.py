@@ -13,7 +13,7 @@ from torchvision import models, transforms as T
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.environ.get("PA3_DADOS", AQUI)
-CLASSES = pd.read_csv(os.path.join(RAIZ, "classes.csv")).label.tolist()
+CLASSES = pd.read_csv(os.path.join(AQUI, "classes.csv")).label.tolist()  # versionado, o predict nao depende dos dados
 IDX = {c: i for i, c in enumerate(CLASSES)}
 DEV = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 TAM = 320

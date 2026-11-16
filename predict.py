@@ -35,4 +35,4 @@ print(len(saida), "imagens em", args.saida)
 if args.rotulos:
     d = saida.merge(pd.read_csv(args.rotulos), on="image_id", suffixes=("_pred", ""))
     f1, acc = metricas(d.label, d.label_pred)
-    print(f"F1 macro {f1:.4f}, acuracia {acc:.4f}")
+    print(f"F1 macro {f1:.4f}, acuracia {acc:.4f} ({len(d)} imagens com rotulo)")
